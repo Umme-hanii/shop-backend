@@ -1,0 +1,2 @@
+::1 - - [17/Sep/2023:12:38:17 +0000] "POST /api/v1/products HTTP/1.1" 200 4
+POST /api/v1/products 200 4 - 3.338 ms
