@@ -4,7 +4,7 @@ const path = require('path')
 const morgan = require('morgan')
 const dotenv = require('dotenv')
 dotenv.config()
-
+const mongoose = require('mongoose')
 const app = express()
 const api = process.env.API_URL
 
@@ -23,11 +23,21 @@ app.get(`${api}/products`, (req, res) => {
   }
   res.send(product)
 })
+
 app.post(`${api}/products`, (req, res) => {
   console.log(req.body)
   res.send('OKkk')
 })
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is listening on port ${process.env.PORT}`)
-})
+const start = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI)
+    app.listen(process.env.PORT, () => {
+      console.log(`Server is listening on port ${process.env.PORT}...`)
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+start()
